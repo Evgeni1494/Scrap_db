@@ -7,6 +7,11 @@ from ..items import ScrapingImdbItem
 
 
 class FilmsSpiderSpider(CrawlSpider):
+    
+    custom_settings = {
+    "ITEM_PIPELINES": {"scraping_imdb.pipelines.ScrapingFilmsPipeline": 300}
+    }
+
     name = "films_spider"
     allowed_domains = ["www.imdb.com"]
     
@@ -51,4 +56,6 @@ class FilmsSpiderSpider(CrawlSpider):
                 items['duree'] = None
         
     
-        yield items
+        return items
+    
+    

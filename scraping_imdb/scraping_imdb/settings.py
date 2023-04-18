@@ -62,9 +62,11 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    "scraping_imdb.pipelines.ScrapingImdbPipeline": 300,
-#}
+# ITEM_PIPELINES = {
+#    "scraping_imdb.pipelines.ScrapingFilmsPipeline": 300,
+#    "scraping_imdb.pipelines.ScrapingSeriesPipeline": 300,
+   
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -100,3 +102,6 @@ RETRY_TIMES = 3
 HTTPCACHE_ENABLED = True 
 
 FEED_EXPORT_FIELDS = ['titre','titre_original','score','genre','annee','duree','description','acteurs_principaux','public','pays']
+
+
+MONGO_DATABASE = "IMDBscrap"
