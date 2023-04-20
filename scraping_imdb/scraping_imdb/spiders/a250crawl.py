@@ -8,9 +8,9 @@ import re
 
 class Series250(CrawlSpider):
     
-    custom_settings = {
-    "ITEM_PIPELINES": {"scraping_imdb.pipelines.ScrapingSeriesPipeline": 300}
-    }
+    # custom_settings = {
+    # "ITEM_PIPELINES": {"scraping_imdb.pipelines.ScrapingSeriesPipeline": 300}
+    # }
     name = '250crawl'
     allowed_domains = ['imdb.com']
 

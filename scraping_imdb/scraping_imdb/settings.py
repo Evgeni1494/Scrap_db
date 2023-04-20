@@ -101,7 +101,8 @@ COOKIES_ENABLED = False
 RETRY_TIMES = 3
 HTTPCACHE_ENABLED = True 
 
-FEED_EXPORT_FIELDS = ['titre','titre_original','score','genre','annee','duree','description','acteurs_principaux','public','pays']
+# FEED_EXPORT_FIELDS = ['titre','titre_original','score','genre','annee','duree','description','acteurs_principaux','public','pays']
 
 
 MONGO_DATABASE = "IMDBscrap"
+

@@ -5,7 +5,7 @@
 
 import scrapy
 
-
+# Modèle de film
 class ScrapingImdbItem(scrapy.Item):
         titre = scrapy.Field()
         titre_original = scrapy.Field()
@@ -17,3 +17,5 @@ class ScrapingImdbItem(scrapy.Item):
         acteurs_principaux = scrapy.Field()
         public = scrapy.Field()
         pays = scrapy.Field()
+        image_url = scrapy.Field()
+        cout = scrapy.Field()
