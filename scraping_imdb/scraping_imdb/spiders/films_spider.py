@@ -5,8 +5,6 @@ import re
 from ..items import ScrapingImdbItem
 
 
-
-
 class FilmsSpiderSpider(CrawlSpider):
     
     custom_settings = {
