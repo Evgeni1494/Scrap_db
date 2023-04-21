@@ -3,6 +3,7 @@ from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 import re
 from ..items import ScrapingImdbItem
+from ..cleaning import cleaning_titre_original,cleaning_cout,cleaning_duree
 
 
 class FilmsSpiderSpider(CrawlSpider):
@@ -28,41 +29,19 @@ class FilmsSpiderSpider(CrawlSpider):
         items = ScrapingImdbItem()
         items['titre'] = response.css('.sc-afe43def-1::text').get()
         items['titre_original'] = response.css('.sc-afe43def-3::text').get()
+        items['titre_original'] = cleaning_titre_original(items['titre_original'])
         items['score'] = response.css('.sc-bde20123-1::text').get()
         items['genre'] = response.css('a span.ipc-chip__text::text').extract()
         items['annee'] = response.css('.sc-afe43def-4 li:nth-of-type(1) a::text').get()
         items['duree'] = response.css('.sc-afe43def-4 li:nth-of-type(3)::text').get()
+        items['duree'] = cleaning_duree(items['duree'])
         items['description'] = response.css('.sc-5f699a2-2::text').get()
         items['acteurs_principaux'] = response.css('.sc-52d569c6-3 .ipc-metadata-list-item--link a.ipc-metadata-list-item__list-content-item::text').extract()
         items['public'] = response.css('.sc-afe43def-4 li:nth-of-type(2) a::text').get()
         items['pays'] = response.css("[data-testid='title-details-origin'] a::text").get()
         items['image_url'] = response.css('.ipc-media--poster-l img::attr(src)').get()
         items['cout'] = response.css("[data-testid='title-boxoffice-budget'] span.ipc-metadata-list-item__list-content-item::text").extract()
-    
-        
-        if items['titre_original']:
-            items['titre_original'] = items['titre_original'].split(":")[-1].strip()
-        
-        if items['duree']:
-            duree = items['duree'].strip()
-            match = re.match(r'^(\d+)h\s*(?:(\d+)m)?$', duree)
-            if match:
-                heures, minutes = match.groups()
-                heures = int(heures)
-                minutes = int(minutes) if minutes is not None else 0
-                if heures >= 0 and minutes >= 0:
-                    items['duree'] = heures * 60 + minutes
-                elif heures >= 0:
-                    items['duree'] = heures * 60
-            else:
-                items['duree'] = None
-
-        if items["cout"]:
-            cost_string = items["cout"][0]
-            cost_string = re.sub(r'[^\d\.\-\s]', '', cost_string)
-            cost_number = int(cost_string)
-            items["cout"] = cost_number
-            print(type(items['cout']))
+        items['cout'] = cleaning_cout(items['cout'])
         
         return items
 
